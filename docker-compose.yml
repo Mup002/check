@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./logs:/app/logs
+      - ./src:/app/src
+      - ./pom.xml:/app/pom.xml
+    command: mvn spring-boot:run -Dspring-boot.devtools.restart.enabled=true
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
